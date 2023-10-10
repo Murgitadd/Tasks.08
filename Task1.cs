@@ -1,10 +1,49 @@
-Console.WriteLine("Enter a four-digit number:");
+using System;
 
-int num = int.Parse(Console.ReadLine());
+public enum Gender
+{
+    Male,
+    Female,
+}
 
-int minlik = num / 1000;
-int yuzluk = (num % 1000) / 100;
-int onluq = (num % 100) / 10;
-int teklik = (num % 10);
+public class Animal
+{
+    public Gender Gender { get; }
+    public DateTime BirthDate { get; }
 
-Console.WriteLine(minlik+yuzluk+onluq+teklik);
+    public Animal(Gender gender, DateTime birthDate)
+    {
+        Gender = gender;
+        BirthDate = birthDate;
+    }
+}
+
+public class Dog : Animal
+{
+    private string name;
+    private string breed;
+
+    public string Name => name;
+    public string Breed => breed;
+
+    public Dog(Gender gender, DateTime birthDate, string name, string breed) : base(gender, birthDate)
+    {
+        this.name = name;
+        this.breed = breed;
+    }
+}
+
+public class Program
+{
+    public static void Main()
+    {
+        Animal animal = new Animal(Gender.Male, new DateTime(2020, 1, 1));
+
+        Dog dog = new Dog(Gender.Female, new DateTime(2018, 5, 5), "Buddy", "Golden Retriever");
+
+        Console.WriteLine($"Animal Gender: {animal.Gender}");
+        Console.WriteLine($"Animal BirthDate: {animal.BirthDate}");
+        Console.WriteLine($"Dog Name: {dog.Name}");
+        Console.WriteLine($"Dog Breed: {dog.Breed}");
+    }
+}
